@@ -11,6 +11,12 @@ namespace CarClassLibrary
         public string Make { get; set; }
         public string Model { get; set; }
         public decimal Price { get; set; } // 2 decimal places are recommended for currency.
+        public string Colour { get; set; }
+        public int Year { get; set; }
+        public int Miles { get; set; }
+        public bool IsNew { get; set; }
+        public decimal SizeOfEngine { get; set; }
+        public int BodyCondition { get; set; } // ranking from 1 to 10
 
         /// <summary>
         /// Default paramaterless constructor.
@@ -33,6 +39,18 @@ namespace CarClassLibrary
             Make = a;
             Model = b;
             Price = c;
+        }
+
+        public Car(string make, string model, string colour, int year, bool isnew, int miles, decimal sizeOfEngine, int bodyCondition)
+        {
+            this.Make = make;
+            this.Model = model;
+            this.Colour = colour;
+            this.Year = year;
+            this.IsNew = isnew;
+            this.Miles = miles;
+            this.SizeOfEngine = sizeOfEngine;
+            this.BodyCondition = bodyCondition;
         }
 
         /// <summary>
