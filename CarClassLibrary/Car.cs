@@ -41,7 +41,7 @@ namespace CarClassLibrary
         /// <returns></returns>
         override public string ToString()
         {
-            return "Make:" + Make + " Model: " + Model + " Price: $" + Price;
+            return "Make: " + Make + " Model: " + Model + " Price: $" + Price;
         }
 
     }

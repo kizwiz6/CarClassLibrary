@@ -25,6 +25,7 @@ namespace CarShopConsoleApp
                 // Will handle a variety of cases.
                 switch (action)
                 {
+                    // Add item to inventory
                     case 1:
                         Console.WriteLine("You chose to add a new car to the inventory.");
 
@@ -48,6 +49,19 @@ namespace CarShopConsoleApp
                         printInventory(s);
                         break;
 
+                    // Add to cart
+                    case 2:
+
+                        Console.WriteLine("You chose to add a car to the shopping cart.");
+                        printInventory(s);
+                        Console.WriteLine("Which item would you like to buy? (number)");
+                        int carChosen = int.Parse(Console.ReadLine());
+
+                        s.ShoppingList.Add(s.CarList[carChosen]); // from carlist add to the shopping list
+
+                        printShoppingCart(s);
+                        break;
+
                     default:
                         break;
                 }
@@ -60,15 +74,30 @@ namespace CarShopConsoleApp
         }
 
         /// <summary>
-        /// Prints everything in the store
+        /// Pritns everything in the shopping cart.
+        /// </summary>
+        /// <param name="s"></param>
+        private static void printShoppingCart(Store s)
+        {
+            // Prints everything in the store
+            for (int i = 0; i < s.ShoppingList.Count; i++)
+            {
+                Console.WriteLine("Cars you have chosen to buy");
+                Console.WriteLine("Car # : " + i + " " + s.ShoppingList[i]); // i is the item number for the loop counter
+            }
+        }
+
+        /// <summary>
+        /// Prints everything in the store.
+        /// Prints a number in front of the items when I display the cart.
         /// </summary>
         /// <param name="s">Name of the store.</param>
         private static void printInventory(Store s)
         {
             // Prints everything in the store
-            foreach (Car c in s.CarList)
+            for (int i = 0; i < s.CarList.Count; i++)
             {
-                Console.WriteLine("Car: " + c);
+                Console.WriteLine("Car # : " + i + " " + s.CarList[i]); // i is the item number for the loop counter
             }
         }
 
