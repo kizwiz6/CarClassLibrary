@@ -35,5 +35,14 @@ namespace CarClassLibrary
             Price = c;
         }
 
+        /// <summary>
+        /// Overrides implementation of a class to simplify the print inventory command.
+        /// </summary>
+        /// <returns></returns>
+        override public string ToString()
+        {
+            return "Make:" + Make + " Model: " + Model + " Price: $" + Price;
+        }
+
     }
 }

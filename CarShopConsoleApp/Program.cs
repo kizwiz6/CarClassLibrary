@@ -6,6 +6,9 @@ namespace CarShopConsoleApp
     {
         static void Main(string[] args)
         {
+            Store s = new Store();
+
+
             // WElcome message
             Console.WriteLine("Welcome to the car store. First you must create some car inventory. Then you may add some cars to the shopping cart. Finally you may checkout which will give you a total value of the shopping cart.");
 
@@ -17,28 +20,56 @@ namespace CarShopConsoleApp
             while (action != 0)
             {
                 Console.WriteLine("You chose " + action);
+
+                // switch case statement to do different actions.
+                // Will handle a variety of cases.
+                switch (action)
+                {
+                    case 1:
+                        Console.WriteLine("You chose to add a new car to the inventory.");
+
+                        String carMake = "";
+                        String carModel = "";
+                        Decimal carPrice = 0;
+
+                        Console.WriteLine("What is the car make? ford, gm, nissan etc.");
+                        carMake = Console.ReadLine();
+
+                        Console.WriteLine("What is the car model? corvette, focus, ranger etc.");
+                        carModel = Console.ReadLine();
+
+                        Console.WriteLine("What is the car price?");
+                        carPrice = int.Parse(Console.ReadLine()); // this will break if the user puts in letters.
+
+                        Car newCar = new Car(carMake, carModel, carPrice);
+                        // now need to add the car to the store:
+                        s.CarList.Add(newCar);
+
+                        printInventory(s);
+                        break;
+
+                    default:
+                        break;
+                }
+
+
                 action = chooseAction(); // ask for a new action - gives another chance to break out the loop
             }
 
-            // First constructor creates a generic car
-            Car c = new Car("Nissan", "Sentra", 7322);
-            // Second constructor uses the paramaters
-            Car d = new Car("Ford", "Mustang", 9200);
-
-            Console.WriteLine("Car c is as follows " + c.Make + " " + c.Model + " " + c.Price);
-            Console.WriteLine("Car d is as follows " + d.Make + " " + d.Model + " " + d.Price);
-
-            Store s = new Store();
-
-            s.ShoppingList.Add(c); // adds car c
-            s.ShoppingList.Add(d); // adds car d
-
-            // Checkout - value of everything in the store.
-            decimal total = s.Checkout();
-
-            Console.WriteLine("Store value is " + total);
-
             Console.ReadLine();
+        }
+
+        /// <summary>
+        /// Prints everything in the store
+        /// </summary>
+        /// <param name="s">Name of the store.</param>
+        private static void printInventory(Store s)
+        {
+            // Prints everything in the store
+            foreach (Car c in s.CarList)
+            {
+                Console.WriteLine("Car: " + c);
+            }
         }
 
         static public int chooseAction()
