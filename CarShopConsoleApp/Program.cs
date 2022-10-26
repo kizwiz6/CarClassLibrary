@@ -40,7 +40,15 @@ namespace CarShopConsoleApp
                         carModel = Console.ReadLine();
 
                         Console.WriteLine("What is the car price?");
-                        carPrice = int.Parse(Console.ReadLine()); // this will break if the user puts in letters.
+
+                        try
+                        {
+                            carPrice = int.Parse(Console.ReadLine());
+                        }
+                        catch (FormatException fe)
+                        {
+                            Console.WriteLine("Uh-oh! Error: " + fe + " Type in a NUMBER, please.");
+                        }
 
                         Car newCar = new Car(carMake, carModel, carPrice);
                         // now need to add the car to the store:
@@ -55,9 +63,25 @@ namespace CarShopConsoleApp
                         Console.WriteLine("You chose to add a car to the shopping cart.");
                         printInventory(s);
                         Console.WriteLine("Which item would you like to buy? (number)");
-                        int carChosen = int.Parse(Console.ReadLine());
 
-                        s.ShoppingList.Add(s.CarList[carChosen]); // from carlist add to the shopping list
+                        try
+                        {
+                            int carChosen = int.Parse(Console.ReadLine());
+                            s.ShoppingList.Add(s.CarList[carChosen]); // from carlist add to the shopping list
+                        }
+                        catch (ArgumentOutOfRangeException ea)
+                        {
+                            Console.WriteLine("Whoops. " + ea);
+                        }
+                        catch (IOException eio)
+                        {
+                            Console.WriteLine("Hey! " + eio);
+                        }
+                        catch (OutOfMemoryException em)
+                        {
+                            Console.WriteLine("Erm " + em);
+                            throw;
+                        }
 
                         printShoppingCart(s);
                         break;
@@ -111,7 +135,16 @@ namespace CarShopConsoleApp
             int choice = 0;
             Console.WriteLine("Choose an action (0) to quit (1) to add a new car to inventory (2) add car to checkout.");
 
-            choice = int.Parse(Console.ReadLine()); // int parse will cause the program to crash if the user types osmething other than an integer. use try {} catch {} to prevent an application crash.
+            try
+            {
+                choice = int.Parse(Console.ReadLine());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
             return choice;
         }
     }
