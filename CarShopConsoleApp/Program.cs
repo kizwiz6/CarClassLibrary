@@ -62,6 +62,11 @@ namespace CarShopConsoleApp
                         printShoppingCart(s);
                         break;
 
+                    case 3:
+                        printShoppingCart(s); // see everything in it.
+                        Console.WriteLine("The total cost of your items is : " + s.Checkout()); // Checkout shows total value then clears the cart so no items left.
+                        break;
+
                     default:
                         break;
                 }
@@ -79,10 +84,10 @@ namespace CarShopConsoleApp
         /// <param name="s"></param>
         private static void printShoppingCart(Store s)
         {
+            Console.WriteLine("Cars you have chosen to buy");
             // Prints everything in the store
             for (int i = 0; i < s.ShoppingList.Count; i++)
             {
-                Console.WriteLine("Cars you have chosen to buy");
                 Console.WriteLine("Car # : " + i + " " + s.ShoppingList[i]); // i is the item number for the loop counter
             }
         }
