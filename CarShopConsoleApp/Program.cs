@@ -6,6 +6,20 @@ namespace CarShopConsoleApp
     {
         static void Main(string[] args)
         {
+            // WElcome message
+            Console.WriteLine("Welcome to the car store. First you must create some car inventory. Then you may add some cars to the shopping cart. Finally you may checkout which will give you a total value of the shopping cart.");
+
+            // Action
+            int action = chooseAction();
+
+            // When we're done with the loop we'll be done with the program
+            // Type in 0 to end the program.
+            while (action != 0)
+            {
+                Console.WriteLine("You chose " + action);
+                action = chooseAction(); // ask for a new action - gives another chance to break out the loop
+            }
+
             // First constructor creates a generic car
             Car c = new Car("Nissan", "Sentra", 7322);
             // Second constructor uses the paramaters
@@ -25,6 +39,15 @@ namespace CarShopConsoleApp
             Console.WriteLine("Store value is " + total);
 
             Console.ReadLine();
+        }
+
+        static public int chooseAction()
+        {
+            int choice = 0;
+            Console.WriteLine("Choose an action (0) to quit (1) to add a new car to inventory (2) add car to checkout.");
+
+            choice = int.Parse(Console.ReadLine()); // int parse will cause the program to crash if the user types osmething other than an integer. use try {} catch {} to prevent an application crash.
+            return choice;
         }
     }
 }
